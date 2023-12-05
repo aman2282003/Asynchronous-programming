@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        input{
+            width:64px;
+        }
+        button{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input type ="number" id="hours">
+        <input type ="number" id="minutes">
+        <input type ="number" id="seconds"><br>
+        <button onclick ="start()">START</button>
+        <button onclick ="stop()">STOP</button>
+        <button onclick ="reset()">RESET</button>
+
+    </div>
+</body>
+</html>
+<script>
+    let totalsecond;
+    let timer;
+    let id;
+    function start(){
+       totalsecond =  Number(document.getElementById("hours").value) * 3600 +
+       Number(document.getElementById("minutes").value) * 60  + 
+       Number(document.getElementById("seconds").value)
+
+       if(totalsecond<=0){
+        alert("please enter a valid time")
+        return 
+    }
+
+        id = setInterval(updatetimer,1000)
+       }
+
+       
+       function updatetimer(){
+        if(totalsecond <= 0){
+            clearInterval(id)
+            alert("Time is up")
+            return;
+        }
+       
+       let hours = Math.floor(totalsecond/3600);
+       let minutes = Math.floor((totalsecond % 3600) /60);
+       let seconds = totalsecond % 60;
+       
+
+       document.getElementById("hours").value = hours
+       document.getElementById("minutes").value = minutes
+       document.getElementById("seconds").value = seconds
+
+        totalsecond--
+    }
+    function stop(){
+        clearInterval(id)
+    }
+    function reset() {
+    document.getElementById("hours").value = "";
+    document.getElementById("minutes").value = "";
+    document.getElementById("seconds").value = "";
+}
+</script>
